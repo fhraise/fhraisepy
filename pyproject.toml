@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "fhraisepy"
+version = "0.1.0"
+description = ""
+license = "GPL-3.0-or-later"
+authors = ["LTFan <xfqwdsj@qq.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+brushface = { git = "https://github.com/xfqwdsj/brushface.git", rev = "main", extras = ["yolo"] }
+cbor2 = "^5.6.2"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[[tool.poetry.source]]
+name = "torch"
+url = "https://download.pytorch.org/whl/cu121"
+priority = "explicit"
