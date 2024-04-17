@@ -2,7 +2,13 @@ import inspect
 
 from fhraisepy import throwable_ptr
 from fhraisepy.handler.ping import handle_ping
+from fhraisepy.handler.register import handle_register
 from fhraisepy.native.libfhraisepy import *
+
+handlers = {
+    b"xyz.xfqlittlefan.fhraise.py.Message.Ping.Request": handle_ping,
+    b"xyz.xfqlittlefan.fhraise.py.Message.Register.Frame": handle_register,
+}
 
 
 def handle_message(
@@ -58,9 +64,15 @@ def get_result_fun(
 
         result: libfhraisepy_kref | None
 
-        if msg_type.value == b"xyz.xfqlittlefan.fhraise.py.Message.Ping.Request":
-            result = handle_ping(lib)
+        if msg_type.value in handlers:
+            result = handlers[msg_type.value](lib, msg_ref)
         else:
+            lib.Logger.error(
+                logger,
+                ctypes.c_char_p(
+                    f"Handler for message type {msg_type.value} not found.".encode()
+                ),
+            )
             result = None
 
         lib.Logger.debug(logger, ctypes.c_char_p(f"Result: {result}".encode()))
