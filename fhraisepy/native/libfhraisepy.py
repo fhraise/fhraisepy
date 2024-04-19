@@ -1,7 +1,5 @@
 """
-Generated from fhraise/Fhraise e04eb5fdd25e3c22bc3c495526a96a6effce92ea
-
-https://github.com/fhraise/Fhraise/commit/e04eb5fdd25e3c22bc3c495526a96a6effce92ea
+https://github.com/fhraise/Fhraise/commit/3e0ddd9fbfa6b37aea8019b9ea31040518b4f955
 """
 
 import ctypes
@@ -30,11 +28,11 @@ class Throwable(ctypes.Structure):
         ("stacktraceSize", ctypes.c_int),
     ]
 
-    type: ctypes.c_char_p
+    type: bytes
     ref: libfhraisepy_KNativePtr
-    message: ctypes.c_char_p
+    message: bytes
     stacktrace: ctypes.POINTER(ctypes.c_char_p)
-    stacktraceSize: ctypes.c_int
+    stacktraceSize: int
 
 
 class libfhraisepy_KType(ctypes.Structure):
@@ -829,7 +827,8 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
                 ctypes.CFUNCTYPE(
                     libfhraisepy_KBoolean,
                     libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Client,
-                    ctypes.POINTER(ctypes.POINTER(Throwable)),
+                    ctypes.CFUNCTYPE(None, Throwable),
+                    ctypes.CFUNCTYPE(None),
                 ),
             ),
             (
@@ -837,10 +836,11 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
                 ctypes.CFUNCTYPE(
                     libfhraisepy_KBoolean,
                     libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Client,
-                    ctypes.POINTER(ctypes.c_char_p),
-                    ctypes.POINTER(libfhraisepy_KNativePtr),
-                    ctypes.POINTER(ctypes.POINTER(Throwable)),
-                    ctypes.CFUNCTYPE(libfhraisepy_KNativePtr),
+                    ctypes.CFUNCTYPE(
+                        libfhraisepy_KNativePtr,
+                        ctypes.c_char_p,
+                        libfhraisepy_KNativePtr,
+                    ),
                 ),
             ),
         ]
@@ -854,17 +854,18 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
         @staticmethod
         def connect(
             thiz: libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Client,
-            throwable: ctypes.POINTER(ctypes.POINTER(Throwable)) = None,
+            onError: ctypes.CFUNCTYPE(None, Throwable),
+            onClose: ctypes.CFUNCTYPE(None),
         ) -> libfhraisepy_KBoolean:
             pass
 
         @staticmethod
         def receive(
             thiz: libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Client,
-            type: ctypes.POINTER(ctypes.c_char_p),
-            ref: ctypes.POINTER(libfhraisepy_KNativePtr),
-            throwable: ctypes.POINTER(ctypes.POINTER(Throwable)),
-            getResult: ctypes.CFUNCTYPE(libfhraisepy_KNativePtr),
+            onMessage: ctypes.CFUNCTYPE(
+                libfhraisepy_KNativePtr, ctypes.c_char_p, libfhraisepy_KNativePtr
+            ),
+            onError: ctypes.CFUNCTYPE(None, Throwable),
         ) -> libfhraisepy_KBoolean:
             pass
 

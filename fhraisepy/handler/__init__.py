@@ -1,82 +1,53 @@
 import inspect
 
-from fhraisepy import throwable_ptr
+import fhraisepy
 from fhraisepy.handler.ping import handle_ping
 from fhraisepy.handler.register import handle_register
+from fhraisepy.logger import Logger
 from fhraisepy.native.libfhraisepy import *
 
+lib = fhraisepy.lib
+
 handlers = {
-    b"xyz.xfqlittlefan.fhraise.py.Message.Ping.Request": handle_ping,
-    b"xyz.xfqlittlefan.fhraise.py.Message.Register.Frame": handle_register,
+    "xyz.xfqlittlefan.fhraise.py.Message.Ping.Request": handle_ping,
+    "xyz.xfqlittlefan.fhraise.py.Message.Register.Frame": handle_register,
 }
 
 
+@ctypes.CFUNCTYPE(libfhraisepy_KNativePtr, ctypes.c_char_p, libfhraisepy_KNativePtr)
 def handle_message(
-    lib: xyz_xfqlittlefan_fhraise_py,
+    raw_msg_type: bytes,
+    msg_ref: int,
+):
+    logger = Logger(f"{__name__}:{inspect.currentframe().f_code.co_name}")
+
+    msg_type = raw_msg_type.decode()
+
+    logger.debug(f"Received message: {msg_type}")
+
+    result: libfhraisepy_kref | None
+
+    if msg_type in handlers:
+        result = handlers[msg_type](lib, msg_ref)
+    else:
+        logger.error(f"Handler for message type {msg_type} not found.")
+        result = None
+
+    logger.debug(f"Result: {result}")
+
+    return result.pinned if result else None
+
+
+def receive_message(
     client: libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Client,
 ):
-    logger = lib.Logger.Logger(
-        ctypes.c_char_p(f"{__name__}:{inspect.currentframe().f_code.co_name}".encode())
-    )
+    logger = Logger(f"{__name__}:{inspect.currentframe().f_code.co_name}")
 
     while True:
-        lib.Logger.debug(
-            logger, ctypes.c_char_p("Preparing to receive message.".encode())
-        )
+        logger.debug("Waiting for message...")
 
-        msg_type = ctypes.c_char_p()
-        msg_ref = libfhraisepy_KNativePtr()
-
-        lib.Logger.debug(logger, ctypes.c_char_p("Waiting for message...".encode()))
-
-        receive_successful = lib.Client.receive(
+        lib.Client.receive(
             client,
-            ctypes.pointer(msg_type),
-            ctypes.pointer(msg_ref),
-            ctypes.pointer(throwable_ptr),
-            ctypes.CFUNCTYPE(libfhraisepy_KNativePtr)(
-                get_result_fun(lib, msg_type, msg_ref)
-            ),
+            handle_message,
+            logger.on_error("Failed to handle message"),
         )
-
-        if not receive_successful:
-            lib.Logger.error(
-                logger,
-                ctypes.c_char_p(
-                    f"Failed to receive message: {throwable_ptr.contents.message}".encode()
-                ),
-            )
-
-
-def get_result_fun(
-    lib: xyz_xfqlittlefan_fhraise_py,
-    msg_type: ctypes.c_char_p,
-    msg_ref: libfhraisepy_KNativePtr,
-):
-    logger = lib.Logger.Logger(
-        ctypes.c_char_p(f"{__name__}:{inspect.currentframe().f_code.co_name}".encode())
-    )
-
-    def fun():
-        lib.Logger.debug(
-            logger, ctypes.c_char_p(f"Received message: {msg_type.value}".encode())
-        )
-
-        result: libfhraisepy_kref | None
-
-        if msg_type.value in handlers:
-            result = handlers[msg_type.value](lib, msg_ref)
-        else:
-            lib.Logger.error(
-                logger,
-                ctypes.c_char_p(
-                    f"Handler for message type {msg_type.value} not found.".encode()
-                ),
-            )
-            result = None
-
-        lib.Logger.debug(logger, ctypes.c_char_p(f"Result: {result}".encode()))
-
-        return result.pinned or None
-
-    return fun

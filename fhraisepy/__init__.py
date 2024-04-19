@@ -4,6 +4,6 @@ FhraisePy 是 Fhraise 项目的 Python 部分，主要负责 Fhraise 的机器�
 
 import ctypes
 
-from fhraisepy.native.libfhraisepy import Throwable
+from fhraisepy.native.libfhraisepy import *
 
-throwable_ptr = ctypes.POINTER(Throwable)()
+lib: xyz_xfqlittlefan_fhraise_py
