@@ -1,4 +1,4 @@
-// https://github.com/fhraise/Fhraise/commit/3e0ddd9fbfa6b37aea8019b9ea31040518b4f955
+// https://github.com/fhraise/Fhraise/commit/62580a7a7d01a8ef7eae869183cbe73e8211f760
 
 #ifndef KONAN_LIBFHRAISEPY_H
 #define KONAN_LIBFHRAISEPY_H
@@ -72,6 +72,9 @@ typedef struct {
 } libfhraisepy_kref_kotlin_ULong;
 typedef struct {
   libfhraisepy_KNativePtr pinned;
+} libfhraisepy_kref_kotlin_ByteArray;
+typedef struct {
+  libfhraisepy_KNativePtr pinned;
 } libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message;
 typedef struct {
   libfhraisepy_KNativePtr pinned;
@@ -84,7 +87,7 @@ typedef struct {
 } libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame;
 typedef struct {
   libfhraisepy_KNativePtr pinned;
-} libfhraisepy_kref_kotlin_ByteArray;
+} libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_FrameFormat;
 typedef struct {
   libfhraisepy_KNativePtr pinned;
 } libfhraisepy_kref_kotlin_Any;
@@ -124,6 +127,12 @@ typedef struct {
 typedef struct {
   libfhraisepy_KNativePtr pinned;
 } libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Companion;
+typedef struct {
+  libfhraisepy_KNativePtr pinned;
+} libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_FrameFormat_Rgb;
+typedef struct {
+  libfhraisepy_KNativePtr pinned;
+} libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_FrameFormat_Companion;
 typedef struct {
   libfhraisepy_KNativePtr pinned;
 } libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Ping;
@@ -202,12 +211,16 @@ typedef struct {
                       libfhraisepy_kref_kotlinx_serialization_KSerializer (*serializer)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame_Companion thiz);
                     } Companion;
                     libfhraisepy_KType* (*_type)(void);
-                    libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame (*Frame)(const char* callId, libfhraisepy_kref_kotlin_ByteArray content);
+                    libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame (*Frame)(const char* callId, libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_FrameFormat format, libfhraisepy_KInt width, libfhraisepy_kref_kotlin_ByteArray content);
                     const char* (*get_callId)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame thiz);
                     libfhraisepy_kref_kotlin_ByteArray (*get_content)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame thiz);
+                    libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_FrameFormat (*get_format)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame thiz);
+                    libfhraisepy_KInt (*get_width)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame thiz);
                     const char* (*component1)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame thiz);
-                    libfhraisepy_kref_kotlin_ByteArray (*component2)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame thiz);
-                    libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame (*copy)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame thiz, const char* callId, libfhraisepy_kref_kotlin_ByteArray content);
+                    libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_FrameFormat (*component2)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame thiz);
+                    libfhraisepy_KInt (*component3)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame thiz);
+                    libfhraisepy_kref_kotlin_ByteArray (*component4)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame thiz);
+                    libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame (*copy)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame thiz, const char* callId, libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_FrameFormat format, libfhraisepy_KInt width, libfhraisepy_kref_kotlin_ByteArray content);
                     libfhraisepy_KBoolean (*equals)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame thiz, libfhraisepy_kref_kotlin_Any other);
                     libfhraisepy_KInt (*hashCode)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame thiz);
                     const char* (*toString)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame thiz);
@@ -251,6 +264,18 @@ typedef struct {
                   libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register (*Register)(libfhraisepy_KInt seen0, libfhraisepy_kref_kotlinx_serialization_internal_SerializationConstructorMarker serializationConstructorMarker);
                   libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register (*Register_)();
                 } Register;
+                struct {
+                  struct {
+                    libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_FrameFormat (*get)(); /* enum entry for Rgb. */
+                  } Rgb;
+                  struct {
+                    libfhraisepy_KType* (*_type)(void);
+                    libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_FrameFormat_Companion (*_instance)();
+                    libfhraisepy_kref_kotlinx_serialization_KSerializer (*serializer)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_FrameFormat_Companion thiz, libfhraisepy_kref_kotlin_Array typeParamsSerializers);
+                    libfhraisepy_kref_kotlinx_serialization_KSerializer (*serializer_)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_FrameFormat_Companion thiz);
+                  } Companion;
+                  libfhraisepy_KType* (*_type)(void);
+                } FrameFormat;
                 struct {
                   struct {
                     libfhraisepy_KType* (*_type)(void);
@@ -305,6 +330,7 @@ typedef struct {
                 void (*warn)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Logger thiz, const char* message);
               } Logger;
               const char* (*get_pyWsPath)();
+              void (*byteArrayToPointer)(libfhraisepy_kref_kotlin_ByteArray byteArray, void* onData);
             } py;
           } fhraise;
         } xfqlittlefan;
