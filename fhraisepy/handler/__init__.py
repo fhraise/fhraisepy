@@ -28,7 +28,7 @@ def handle_message(
     result: libfhraisepy_kref | None
 
     if msg_type in handlers:
-        result = handlers[msg_type](lib, msg_ref)
+        result = handlers[msg_type](msg_ref)
     else:
         logger.error(f"Handler for message type {msg_type} not found.")
         result = None
