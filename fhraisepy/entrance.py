@@ -5,14 +5,7 @@ from fhraisepy.native.libfhraisepy import *
 
 
 def entrance(lib_path: str, host: str, port: int):
-    cdll = ctypes.CDLL(lib_path)
-
-    cdll.libfhraisepy_symbols.argtypes = ()
-    cdll.libfhraisepy_symbols.restype = ctypes.POINTER(libfhraisepy_ExportedSymbols)
-
-    fhraisepy.lib = (
-        cdll.libfhraisepy_symbols().contents.kotlin.root.xyz.xfqlittlefan.fhraise.py
-    )
+    fhraisepy.load_lib(lib_path)
 
     lib = fhraisepy.lib
 
