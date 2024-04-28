@@ -1,15 +1,14 @@
-import ctypes
 import inspect
-from typing import Callable, Dict, Tuple
+from pathlib import Path
+from typing import Callable, Dict
 
 import brushface
+import cv2
 import numpy as np
-from brushface.models import YoloClient
 
 from fhraisepy import lib
 from fhraisepy.logger import Logger
 from fhraisepy.native.libfhraisepy import *
-
 
 frame_converters: Dict[int, Callable[[np.ndarray, int], np.ndarray]] = {
     lib.Message.FrameFormat.Rgb.get().pinned: lambda frame, width: frame.reshape(
@@ -20,7 +19,7 @@ frame_converters: Dict[int, Callable[[np.ndarray, int], np.ndarray]] = {
 将任意格式的帧转换为 RGB 3 维数组。
 """
 
-
+db_path = Path("images")
 confidence_threshold = 0.8
 num_images = 5
 
@@ -41,11 +40,20 @@ def on_data(
 
         result.contents = ref
 
-    def success():
+    def next():
         global processed_frame
         processed_frame += 1
 
-        return void(lib.Message.Register.Result.Success._instance())
+        if processed_frame == num_images:
+            global current_call_id
+            current_call_id = None
+            processed_frame = 0
+
+            brushface.update_datastore(db_path)
+
+            return void(lib.Message.Register.Result.Success._instance())
+
+        return void(lib.Message.Register.Result.Next._instance())
 
     @ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_char), ctypes.c_int)
     def send_frame(data: ctypes.POINTER(ctypes.c_char), size: int):
@@ -69,7 +77,7 @@ def on_data(
 
         if len(faces) == 0:
             logger.error("No faces detected.")
-            return void(lib.Message.Register.Result.LowResolution._instance())
+            return void(lib.Message.Register.Result.NoFaces._instance())
 
         face = faces[0]
 
@@ -82,6 +90,9 @@ def on_data(
 
         global current_call_id
         current_call_id = call_id
+
+        cv2.imwrite(str(db_path / call_id / f"{processed_frame}.jpg"), face["img"])
+        return next()
 
     return send_frame
 
@@ -105,7 +116,7 @@ def handle_register(frame_ref_ptr: int):
 
     if busy:
         logger.error(f"Received frame with call ID {call_id} while busy.")
-        return lib.Message.Register.Result.InternalError._instance()
+        return lib.Message.Register.Result.Next._instance()
 
     logger.debug(f"Processing frame with call ID {call_id}.")
 

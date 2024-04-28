@@ -1,5 +1,5 @@
 """
-https://github.com/fhraise/Fhraise/commit/eb909ae1af9f08cef9ac2d05ababac34f1484d39
+https://github.com/fhraise/Fhraise/commit/5893118fb0461677320f52bfc7c042480e20c80a
 """
 
 import ctypes
@@ -171,6 +171,12 @@ class libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result(
     pass
 
 
+class libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Next(
+    libfhraisepy_kref
+):
+    pass
+
+
 class libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Success(
     libfhraisepy_kref
 ):
@@ -178,6 +184,12 @@ class libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Succ
 
 
 class libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_LowResolution(
+    libfhraisepy_kref
+):
+    pass
+
+
+class libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_NoFaces(
     libfhraisepy_kref
 ):
     pass
@@ -462,6 +474,63 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
                     pass
 
             class Result(ctypes.Structure):
+                class Next(ctypes.Structure):
+                    _fields_ = [
+                        (
+                            "_type",
+                            ctypes.CFUNCTYPE(ctypes.POINTER(libfhraisepy_KType)),
+                        ),
+                        (
+                            "_instance",
+                            ctypes.CFUNCTYPE(
+                                libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Next
+                            ),
+                        ),
+                        (
+                            "equals",
+                            ctypes.CFUNCTYPE(
+                                libfhraisepy_KBoolean,
+                                libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Next,
+                                libfhraisepy_kref_kotlin_Any,
+                            ),
+                        ),
+                        (
+                            "hashCode",
+                            ctypes.CFUNCTYPE(
+                                libfhraisepy_KInt,
+                                libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Next,
+                            ),
+                        ),
+                        (
+                            "serializer",
+                            ctypes.CFUNCTYPE(
+                                libfhraisepy_kref_kotlinx_serialization_KSerializer,
+                                libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Next,
+                                libfhraisepy_kref_kotlin_Array,
+                            ),
+                        ),
+                        (
+                            "serializer_",
+                            ctypes.CFUNCTYPE(
+                                libfhraisepy_kref_kotlinx_serialization_KSerializer,
+                                libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Next,
+                            ),
+                        ),
+                        (
+                            "toString",
+                            ctypes.CFUNCTYPE(
+                                ctypes.c_char_p,
+                                libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Next,
+                            ),
+                        ),
+                    ]
+
+                    @staticmethod
+                    def _instance() -> (
+                        libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Next
+                    ):
+                        pass
+
                 class Success(ctypes.Structure):
                     _fields_ = [
                         (
@@ -516,6 +585,63 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
                     @staticmethod
                     def _instance() -> (
                         libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Success
+                    ):
+                        pass
+
+                class NoFaces(ctypes.Structure):
+                    _fields_ = [
+                        (
+                            "_type",
+                            ctypes.CFUNCTYPE(ctypes.POINTER(libfhraisepy_KType)),
+                        ),
+                        (
+                            "_instance",
+                            ctypes.CFUNCTYPE(
+                                libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_NoFaces
+                            ),
+                        ),
+                        (
+                            "equals",
+                            ctypes.CFUNCTYPE(
+                                libfhraisepy_KBoolean,
+                                libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_NoFaces,
+                                libfhraisepy_kref_kotlin_Any,
+                            ),
+                        ),
+                        (
+                            "hashCode",
+                            ctypes.CFUNCTYPE(
+                                libfhraisepy_KInt,
+                                libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_NoFaces,
+                            ),
+                        ),
+                        (
+                            "serializer",
+                            ctypes.CFUNCTYPE(
+                                libfhraisepy_kref_kotlinx_serialization_KSerializer,
+                                libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_NoFaces,
+                                libfhraisepy_kref_kotlin_Array,
+                            ),
+                        ),
+                        (
+                            "serializer_",
+                            ctypes.CFUNCTYPE(
+                                libfhraisepy_kref_kotlinx_serialization_KSerializer,
+                                libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_NoFaces,
+                            ),
+                        ),
+                        (
+                            "toString",
+                            ctypes.CFUNCTYPE(
+                                ctypes.c_char_p,
+                                libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_NoFaces,
+                            ),
+                        ),
+                    ]
+
+                    @staticmethod
+                    def _instance() -> (
+                        libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_NoFaces
                     ):
                         pass
 
@@ -663,7 +789,9 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
                     ]
 
                 _fields_ = [
+                    ("Next", Next),
                     ("Success", Success),
+                    ("NoFaces", NoFaces),
                     ("LowResolution", LowResolution),
                     ("InternalError", InternalError),
                     ("Companion", Companion),

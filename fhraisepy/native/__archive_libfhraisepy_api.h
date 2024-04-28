@@ -1,4 +1,4 @@
-// https://github.com/fhraise/Fhraise/commit/eb909ae1af9f08cef9ac2d05ababac34f1484d39
+// https://github.com/fhraise/Fhraise/commit/5893118fb0461677320f52bfc7c042480e20c80a
 
 #ifndef KONAN_LIBFHRAISEPY_H
 #define KONAN_LIBFHRAISEPY_H
@@ -117,7 +117,13 @@ typedef struct {
 } libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result;
 typedef struct {
   libfhraisepy_KNativePtr pinned;
+} libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Next;
+typedef struct {
+  libfhraisepy_KNativePtr pinned;
 } libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Success;
+typedef struct {
+  libfhraisepy_KNativePtr pinned;
+} libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_NoFaces;
 typedef struct {
   libfhraisepy_KNativePtr pinned;
 } libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_LowResolution;
@@ -231,6 +237,15 @@ typedef struct {
                   struct {
                     struct {
                       libfhraisepy_KType* (*_type)(void);
+                      libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Next (*_instance)();
+                      libfhraisepy_KBoolean (*equals)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Next thiz, libfhraisepy_kref_kotlin_Any other);
+                      libfhraisepy_KInt (*hashCode)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Next thiz);
+                      libfhraisepy_kref_kotlinx_serialization_KSerializer (*serializer)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Next thiz, libfhraisepy_kref_kotlin_Array typeParamsSerializers);
+                      libfhraisepy_kref_kotlinx_serialization_KSerializer (*serializer_)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Next thiz);
+                      const char* (*toString)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Next thiz);
+                    } Next;
+                    struct {
+                      libfhraisepy_KType* (*_type)(void);
                       libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Success (*_instance)();
                       libfhraisepy_KBoolean (*equals)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Success thiz, libfhraisepy_kref_kotlin_Any other);
                       libfhraisepy_KInt (*hashCode)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Success thiz);
@@ -238,6 +253,15 @@ typedef struct {
                       libfhraisepy_kref_kotlinx_serialization_KSerializer (*serializer_)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Success thiz);
                       const char* (*toString)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Success thiz);
                     } Success;
+                    struct {
+                      libfhraisepy_KType* (*_type)(void);
+                      libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_NoFaces (*_instance)();
+                      libfhraisepy_KBoolean (*equals)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_NoFaces thiz, libfhraisepy_kref_kotlin_Any other);
+                      libfhraisepy_KInt (*hashCode)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_NoFaces thiz);
+                      libfhraisepy_kref_kotlinx_serialization_KSerializer (*serializer)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_NoFaces thiz, libfhraisepy_kref_kotlin_Array typeParamsSerializers);
+                      libfhraisepy_kref_kotlinx_serialization_KSerializer (*serializer_)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_NoFaces thiz);
+                      const char* (*toString)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_NoFaces thiz);
+                    } NoFaces;
                     struct {
                       libfhraisepy_KType* (*_type)(void);
                       libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_LowResolution (*_instance)();
