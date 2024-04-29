@@ -4,8 +4,9 @@ import fhraisepy
 from fhraisepy.native.libfhraisepy import *
 
 
-def entrance(lib_path: str, host: str, port: int):
-    fhraisepy.load_lib(lib_path)
+def entrance(host: str, port: int, lib_path: str = None):
+    if lib_path:
+        fhraisepy.load_lib(lib_path)
 
     lib = fhraisepy.lib
 
