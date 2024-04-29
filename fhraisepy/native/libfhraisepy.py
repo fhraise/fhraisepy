@@ -189,13 +189,13 @@ class libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_Succ
     pass
 
 
-class libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_LowResolution(
+class libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_NoFaces(
     libfhraisepy_kref
 ):
     pass
 
 
-class libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_NoFaces(
+class libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Result_LowResolution(
     libfhraisepy_kref
 ):
     pass
@@ -455,6 +455,7 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
                 def Frame(
                     callId: ctypes.c_char_p,
                     format: libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_FrameFormat,
+                    width: libfhraisepy_KInt,
                     content: libfhraisepy_kref_kotlin_ByteArray,
                 ) -> (
                     libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame
@@ -1001,7 +1002,7 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
 
         class FrameFormat(ctypes.Structure):
             class Rgb(ctypes.Structure):
-                __fields__ = [
+                _fields_ = [
                     (
                         "get",
                         ctypes.CFUNCTYPE(
