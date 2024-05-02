@@ -1,4 +1,4 @@
-// https://github.com/fhraise/Fhraise/commit/367759c8c7e9062102970142de0db95ab51df9ce
+// https://github.com/fhraise/Fhraise/commit/a421738ad9534ed8b310ee4b715ca9b6064a3bed
 
 #ifndef KONAN_LIBFHRAISEPY_H
 #define KONAN_LIBFHRAISEPY_H
@@ -334,6 +334,7 @@ typedef struct {
                 void (*debug)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Logger thiz, const char* message);
                 void (*error)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Logger thiz, const char* message);
                 void (*info)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Logger thiz, const char* message);
+                void (*trace)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Logger thiz, const char* message);
                 void (*warn)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Logger thiz, const char* message);
               } Logger;
               void (*byteArrayToPointer)(libfhraisepy_kref_kotlin_ByteArray byteArray, void* onData);

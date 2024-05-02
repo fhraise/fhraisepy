@@ -1,5 +1,5 @@
 """
-https://github.com/fhraise/Fhraise/commit/367759c8c7e9062102970142de0db95ab51df9ce
+https://github.com/fhraise/Fhraise/commit/a421738ad9534ed8b310ee4b715ca9b6064a3bed
 """
 
 import ctypes
@@ -1145,6 +1145,14 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
                 ),
             ),
             (
+                "trace",
+                ctypes.CFUNCTYPE(
+                    None,
+                    libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Logger,
+                    ctypes.c_char_p,
+                ),
+            ),
+            (
                 "warn",
                 ctypes.CFUNCTYPE(
                     None,
@@ -1158,6 +1166,13 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
         def Logger(
             tag: ctypes.c_char_p,
         ) -> libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Logger:
+            pass
+
+        @staticmethod
+        def trace(
+            thiz: libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Logger,
+            message: ctypes.c_char_p,
+        ):
             pass
 
         @staticmethod
