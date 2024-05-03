@@ -98,7 +98,15 @@ def on_data(
 
 
 def handle_register(frame_ref_ptr: int):
+    global current_call_id, processed_frame, busy
+
     logger = Logger(f"{__name__}:{inspect.currentframe().f_code.co_name}")
+
+    if frame_ref_ptr == lib.Message.Register.Cancel._instance().pinned:
+        current_call_id = None
+        processed_frame = 0
+        busy = False
+        return lib.Message.Register.Result.Cancelled._instance()
 
     frame_ref = libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Register_Frame(
         frame_ref_ptr
@@ -111,8 +119,6 @@ def handle_register(frame_ref_ptr: int):
             f"Received frame with call ID {call_id} while processing {current_call_id}."
         )
         return lib.Message.Register.Result.InternalError._instance()
-
-    global busy
 
     if busy:
         logger.error(f"Received frame with call ID {call_id} while busy.")
