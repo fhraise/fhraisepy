@@ -11,6 +11,7 @@ torch.set_default_device("cuda")
 
 from fhraisepy.native.libfhraisepy import *
 
+symbols: libfhraisepy_ExportedSymbols
 lib: xyz_xfqlittlefan_fhraise_py
 
 
@@ -20,7 +21,8 @@ def load_lib(lib_path: str):
     cdll.libfhraisepy_symbols.argtypes = ()
     cdll.libfhraisepy_symbols.restype = ctypes.POINTER(libfhraisepy_ExportedSymbols)
 
-    global lib
-    lib = cdll.libfhraisepy_symbols().contents.kotlin.root.xyz.xfqlittlefan.fhraise.py
+    global symbols, lib
+    symbols = cdll.libfhraisepy_symbols().contents
+    lib = symbols.kotlin.root.xyz.xfqlittlefan.fhraise.py
 
     return lib

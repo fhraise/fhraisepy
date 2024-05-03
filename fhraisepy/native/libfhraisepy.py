@@ -1,5 +1,5 @@
 """
-https://github.com/fhraise/Fhraise/commit/75fc033643f06985c782610023abb0c4e511d462
+https://github.com/fhraise/Fhraise/commit/ad3bfb0c44f6134fa2689f4a422c4052db73258e
 """
 
 import ctypes
@@ -178,18 +178,6 @@ class libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client(libfhraisepy_
 
 
 class libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame(
-    libfhraisepy_kref
-):
-    pass
-
-
-class libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame_FrameFormat(
-    libfhraisepy_kref
-):
-    pass
-
-
-class libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame_FrameFormat_Rgb(
     libfhraisepy_kref
 ):
     pass
@@ -508,46 +496,17 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
                         ctypes.CFUNCTYPE(ctypes.POINTER(libfhraisepy_KType)),
                     ),
                     (
-                        "_instance",
+                        "Response",
+                        ctypes.CFUNCTYPE(
+                            libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Handshake_Response,
+                            libfhraisepy_KInt,
+                            libfhraisepy_kref_kotlinx_serialization_internal_SerializationConstructorMarker,
+                        ),
+                    ),
+                    (
+                        "Response_",
                         ctypes.CFUNCTYPE(
                             libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Handshake_Response
-                        ),
-                    ),
-                    (
-                        "equals",
-                        ctypes.CFUNCTYPE(
-                            libfhraisepy_KBoolean,
-                            libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Handshake_Response,
-                            libfhraisepy_kref_kotlin_Any,
-                        ),
-                    ),
-                    (
-                        "hashCode",
-                        ctypes.CFUNCTYPE(
-                            libfhraisepy_KInt,
-                            libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Handshake_Response,
-                        ),
-                    ),
-                    (
-                        "serializer",
-                        ctypes.CFUNCTYPE(
-                            libfhraisepy_kref_kotlinx_serialization_KSerializer,
-                            libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Handshake_Response,
-                            libfhraisepy_kref_kotlin_Array,
-                        ),
-                    ),
-                    (
-                        "serializer_",
-                        ctypes.CFUNCTYPE(
-                            libfhraisepy_kref_kotlinx_serialization_KSerializer,
-                            libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Handshake_Response,
-                        ),
-                    ),
-                    (
-                        "toString",
-                        ctypes.CFUNCTYPE(
-                            ctypes.c_char_p,
-                            libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Handshake_Response,
                         ),
                     ),
                 ]
@@ -577,28 +536,6 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
 
         class Client(ctypes.Structure):
             class Frame(ctypes.Structure):
-                class FrameFormat(ctypes.Structure):
-                    class Rgb(ctypes.Structure):
-                        _fields_ = [
-                            (
-                                "get",
-                                ctypes.CFUNCTYPE(
-                                    libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame_FrameFormat_Rgb
-                                ),
-                            )
-                        ]
-
-                        @staticmethod
-                        def get() -> (
-                            libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame_FrameFormat_Rgb
-                        ):
-                            pass
-
-                    _fields_ = [
-                        ("Rgb", Rgb),
-                        ("_type", ctypes.CFUNCTYPE(ctypes.POINTER(libfhraisepy_KType))),
-                    ]
-
                 class serializer(ctypes.Structure):
                     _fields_ = [
                         ("_type", ctypes.CFUNCTYPE(ctypes.POINTER(libfhraisepy_KType))),
@@ -642,7 +579,6 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
                     ]
 
                 _fields_ = [
-                    ("FrameFormat", FrameFormat),
                     ("$serializer", serializer),
                     (
                         "_type",
@@ -653,7 +589,6 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
                         ctypes.CFUNCTYPE(
                             libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame,
                             ctypes.c_char_p,
-                            libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame_FrameFormat,
                             libfhraisepy_KInt,
                             libfhraisepy_kref_kotlin_ByteArray,
                         ),
@@ -667,13 +602,6 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
                     ),
                     (
                         "get_format",
-                        ctypes.CFUNCTYPE(
-                            libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame_FrameFormat,
-                            libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame,
-                        ),
-                    ),
-                    (
-                        "get_userId",
                         ctypes.CFUNCTYPE(
                             ctypes.c_char_p,
                             libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame,
@@ -696,19 +624,12 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
                     (
                         "component2",
                         ctypes.CFUNCTYPE(
-                            libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame_FrameFormat,
-                            libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame,
-                        ),
-                    ),
-                    (
-                        "component3",
-                        ctypes.CFUNCTYPE(
                             libfhraisepy_KInt,
                             libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame,
                         ),
                     ),
                     (
-                        "component4",
+                        "component3",
                         ctypes.CFUNCTYPE(
                             libfhraisepy_kref_kotlin_ByteArray,
                             libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame,
@@ -720,7 +641,6 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
                             libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame,
                             libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame,
                             ctypes.c_char_p,
-                            libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame_FrameFormat,
                             libfhraisepy_KInt,
                             libfhraisepy_kref_kotlin_ByteArray,
                         ),
@@ -750,15 +670,9 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
                 ]
 
                 @staticmethod
-                def get_userId(
-                    thiz: libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame,
-                ) -> bytes:
-                    pass
-
-                @staticmethod
                 def get_format(
                     thiz: libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame,
-                ) -> libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Message_Client_Frame_FrameFormat:
+                ) -> bytes:
                     pass
 
                 @staticmethod
@@ -1538,7 +1452,7 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
             ctypes.CFUNCTYPE(
                 None,
                 libfhraisepy_kref_kotlin_ByteArray,
-                ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_byte), ctypes.c_int),
+                ctypes.CFUNCTYPE(None, ctypes.c_void_p, ctypes.c_int),
             ),
         ),
     ]
@@ -1546,7 +1460,7 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
     @staticmethod
     def byteArrayToPointer(
         byteArray: libfhraisepy_kref_kotlin_ByteArray,
-        onData: ctypes.CFUNCTYPE(None, ctypes.POINTER(ctypes.c_byte), ctypes.c_int),
+        onData: ctypes.CFUNCTYPE(None, ctypes.c_void_p, ctypes.c_int),
     ):
         pass
 
@@ -1703,7 +1617,7 @@ class libfhraisepy_ExportedSymbols(ctypes.Structure):
 
     @staticmethod
     def IsInstance(
-        ref: libfhraisepy_KNativePtr, type: ctypes.POINTER(libfhraisepy_KType)
+        ref: libfhraisepy_KNativePtr, ktype: ctypes.POINTER(libfhraisepy_KType)
     ) -> bool:
         pass
 

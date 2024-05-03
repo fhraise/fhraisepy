@@ -15,6 +15,9 @@ class Logger:
         self.__lib = lib or fhraisepy.lib
         self.__logger = self.__lib.Logger.Logger(ctypes.c_char_p(tag.encode()))
 
+    def trace(self, message: str):
+        self.__lib.Logger.trace(self.__logger, ctypes.c_char_p(message.encode()))
+
     def debug(self, message: str):
         self.__lib.Logger.debug(self.__logger, ctypes.c_char_p(message.encode()))
 
