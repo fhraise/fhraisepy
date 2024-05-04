@@ -87,11 +87,10 @@ def receive_message(
 ):
     logger = Logger(f"{__name__}:{inspect.currentframe().f_code.co_name}")
 
-    while True:
-        logger.debug("Waiting for message...")
+    logger.debug("Start receiving messages.")
 
-        lib.Client.receive(
-            client,
-            handle_message,
-            logger.on_error("Failed to handle message"),
-        )
+    lib.Client.receive(
+        client,
+        handle_message,
+        logger.on_error("Failed to handle message"),
+    )

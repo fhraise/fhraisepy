@@ -26,3 +26,24 @@ def load_lib(lib_path: str):
     lib = symbols.kotlin.root.xyz.xfqlittlefan.fhraise.py
 
     return lib
+
+
+if __name__ == "__main__":
+    import sys
+
+    sys.argv = sys.argv[1:]
+
+    if len(sys.argv) == 3:
+        host, port, path = sys.argv
+    else:
+        host = None
+        port = None
+        path = None
+
+    from fhraisepy.entrance import entrance
+
+    entrance(
+        host or input("Host (localhost): ") or "localhost",
+        int(port or input("Port (11451): ") or "11451"),
+        path or input("Path to library: "),
+    )

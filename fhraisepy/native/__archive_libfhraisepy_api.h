@@ -1,4 +1,4 @@
-// https://github.com/fhraise/Fhraise/commit/ad3bfb0c44f6134fa2689f4a422c4052db73258e
+// https://github.com/fhraise/Fhraise/commit/c99730361dbf4ffe4293f6bb9560ff6bc0fd37f7
 
 #ifndef KONAN_LIBFHRAISEPY_H
 #define KONAN_LIBFHRAISEPY_H
@@ -375,8 +375,8 @@ typedef struct {
               struct {
                 libfhraisepy_KType* (*_type)(void);
                 libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Client (*Client)(const char* host, libfhraisepy_KUShort port);
-                libfhraisepy_KBoolean (*connect)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Client thiz, void* onError, void* onClose);
-                libfhraisepy_KBoolean (*receive)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Client thiz, void* onMessage, void* onError);
+                void (*connect)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Client thiz, void* onConnect, void* onError, void* onClose);
+                void (*receive)(libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Client thiz, void* onMessage, void* onError);
               } Client;
               struct {
                 libfhraisepy_KType* (*_type)(void);

@@ -106,7 +106,7 @@ yolo = ["ultralytics (>=8.1.26,<9.0.0)"]
 type = "git"
 url = "https://github.com/xfqwdsj/brushface.git"
 reference = "main"
-resolved_reference = "92d7e149e4f19a9512fe46167ac819fddd5c03f6"
+resolved_reference = "affad68ec5b848e633e1a174660bcf0c899dae88"
 
 [[package]]
 name = "cbor2"

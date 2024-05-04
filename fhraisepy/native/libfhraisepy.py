@@ -1,5 +1,5 @@
 """
-https://github.com/fhraise/Fhraise/commit/ad3bfb0c44f6134fa2689f4a422c4052db73258e
+https://github.com/fhraise/Fhraise/commit/c99730361dbf4ffe4293f6bb9560ff6bc0fd37f7
 """
 
 import ctypes
@@ -1306,8 +1306,9 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
             (
                 "connect",
                 ctypes.CFUNCTYPE(
-                    libfhraisepy_KBoolean,
+                    None,
                     libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Client,
+                    ctypes.CFUNCTYPE(None),
                     ctypes.CFUNCTYPE(None, Throwable),
                     ctypes.CFUNCTYPE(None),
                 ),
@@ -1315,7 +1316,7 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
             (
                 "receive",
                 ctypes.CFUNCTYPE(
-                    libfhraisepy_KBoolean,
+                    None,
                     libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Client,
                     ctypes.CFUNCTYPE(
                         libfhraisepy_KNativePtr,
@@ -1335,9 +1336,10 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
         @staticmethod
         def connect(
             thiz: libfhraisepy_kref_xyz_xfqlittlefan_fhraise_py_Client,
+            onConnect: ctypes.CFUNCTYPE(None),
             onError: ctypes.CFUNCTYPE(None, Throwable),
             onClose: ctypes.CFUNCTYPE(None),
-        ) -> bool:
+        ):
             pass
 
         @staticmethod
@@ -1347,7 +1349,7 @@ class xyz_xfqlittlefan_fhraise_py(ctypes.Structure):
                 libfhraisepy_KNativePtr, ctypes.c_char_p, libfhraisepy_KNativePtr
             ),
             onError: ctypes.CFUNCTYPE(None, Throwable),
-        ) -> bool:
+        ):
             pass
 
     class Logger(ctypes.Structure):
