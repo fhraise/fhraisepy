@@ -3,11 +3,14 @@ FhraisePy 是 Fhraise 项目的 Python 部分，主要负责 Fhraise 的机器�
 """
 
 import os
+from pathlib import Path
 
 import torch
 
 os.environ["KERAS_BACKEND"] = "torch"
-torch.set_default_device("cuda")
+
+if bool(os.environ.get("FHRAISEPY_USE_CUDA", default="True")):
+    torch.set_default_device("cuda")
 
 from fhraisepy.native.libfhraisepy import *
 
@@ -29,21 +32,41 @@ def load_lib(lib_path: str):
 
 
 if __name__ == "__main__":
-    import sys
+    env_file_path = Path("fhraisepy.env")
 
-    sys.argv = sys.argv[1:]
+    if env_file_path.exists():
+        with env_file_path.open() as env_file:
+            for line in env_file:
+                key, value = line.strip().split("=", maxsplit=1)
+                os.environ[key] = value
+            env_file.close()
 
-    if len(sys.argv) == 3:
-        host, port, path = sys.argv
-    else:
-        host = None
-        port = None
-        path = None
+    host = os.environ.get("FHRAISEPY_HOST", default=None)
+    port = os.environ.get("FHRAISEPY_PORT", default=None)
+    path = os.environ.get("FHRAISEPY_LIB_PATH", default=None)
+
+    instant_run = os.environ.get("FHRAISEPY_INSTANT_RUN", default=False)
+
+    if not instant_run and not (host and port and path):
+        import sys
+
+        argv = sys.argv[1:]
+
+        if len(argv) == 1:
+            path = argv[0]
+        elif len(argv) == 2:
+            host, port = argv
+        elif len(argv) == 3:
+            host, port, path = argv
+
+    if not instant_run and not (host and port and path):
+        host = host or input("Host (localhost): ")
+        port = port or input("Port (11451): ")
+        path = path or input("Path to library: ")
+
+    host = host or "localhost"
+    port = port or "11451"
 
     from fhraisepy.entrance import entrance
 
-    entrance(
-        host or input("Host (localhost): ") or "localhost",
-        int(port or input("Port (11451): ") or "11451"),
-        path or input("Path to library: "),
-    )
+    entrance(host, int(port), path)

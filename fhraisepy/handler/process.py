@@ -1,5 +1,5 @@
-import ctypes
 import inspect
+import os
 from enum import Enum
 from pathlib import Path
 from time import time
@@ -9,7 +9,7 @@ import brushface
 import cv2
 import numpy as np
 
-from fhraisepy import lib, symbols
+from fhraisepy import lib
 from fhraisepy.logger import Logger
 from fhraisepy.native.libfhraisepy import *
 
@@ -31,10 +31,12 @@ frame_converters: Dict[str, Callable[[np.ndarray, int], np.ndarray]] = {
 函数的第一个参数是帧的原始数据，第二个参数是帧的宽度。
 """
 
-db_path = Path("images")
-confidence_threshold = 0.8
-register_max_frame = 5
-timeout_seconds = 30
+db_path = Path(os.environ.get("FHRAISEPY_DB_PATH", default="db"))
+confidence_threshold = float(
+    os.environ.get("FHRAISEPY_FACE_CONFIDENCE_THRESHOLD", default=0.8)
+)
+register_max_frame = int(os.environ.get("FHRAISEPY_REGISTER_MAX_FRAME", default=5))
+timeout_seconds = int(os.environ.get("FHRAISEPY_TIMEOUT_SECONDS", default=30))
 
 current_user_id: str | None = None
 process_type: ProcessType | None = None
